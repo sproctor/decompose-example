@@ -61,10 +61,11 @@ class RootComponent(
             customers = customerRepository.getCustomers(),
             navigateBack = { router.pop() },
             onCustomerSelected = { customerId ->
-                router.pop()
-                val activeChild = router.activeChild.instance
-                if (activeChild is CustomerSelectListener) {
-                    activeChild.customerSelected(customerId)
+                router.pop {
+                    val activeChild = router.activeChild.instance
+                    if (activeChild is CustomerSelectListener) {
+                        activeChild.customerSelected(customerId)
+                    }
                 }
             }
         )
